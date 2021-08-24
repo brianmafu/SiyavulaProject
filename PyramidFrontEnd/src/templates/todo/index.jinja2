@@ -1,0 +1,112 @@
+{% extends "base.jinja2" %} {% block content %}
+<div class="content">
+  <h1>
+    <span class="smaller">Welcome to the Siyavula Education App</span>
+  </h1>
+  <div>
+    <b-alert :show="show" :variant='message.color'>[[ message.text ]]</b-alert>
+    <b-form @submit.prevent="onSubmitPost">
+      <b-form-group id="input-group-1" label="Title:" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="form.name"
+          required
+          placeholder="Add Item Name"
+        ></b-form-input>
+      </b-form-group>
+    
+
+      <b-button type="submit" variant="primary">Add Item to List</b-button>
+    </b-form>
+
+          <div
+        v-for="todo in todo_list"
+        :key="todo.id"
+        class="row mt-3 border-bottom"
+      >
+        <div class="col-md-1">
+          [[ todo.id ]]
+        </div>
+        <div class="col-md">
+          [[ todo.name ]]
+        </div>
+        </div>
+  </div>
+  
+</div>
+{% endblock content %} {% block script %}
+<script src="{{ request.static_path('src:static/api.js') }}"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    delimiters: ["[[", "]]"],
+    data() {
+      return {
+        message: {
+          text: "",
+          color: ""
+        },
+        show: false,
+        form: {
+          name: "",
+        },
+        todo_list: "",
+      };
+    },
+    methods: {
+      async getApi(evt) {
+        api({
+          method: "get",
+          url: "/api/todo",
+        })
+          .then((response) => {
+            console.log(response);
+            this.todo_list = response.data.todo_list;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      onSubmitPost(evt) {
+        api({
+          method: "post",
+          url: "/api/todo",
+          data: this.form,
+        })
+          .then((response) => {
+            this.show = true;
+            create_todo = response.data.create_todo;
+            this.message.text = `ID ${create_todo.id}: ${create_todo.name} Title`
+            this.message.color = "success"
+            this.getApi()
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      onClickEdit(evt) {},
+      onClickDelete(deleteTodoId) {
+        console.log(deleteTodoId)
+        api({
+          method: "delete",
+          url: "/api/todo",
+          data: deleteTodoId,
+        })
+          .then((response) => {
+            this.show = true;
+            delete_todo = response.data.delete_todo;
+            this.message.text = `${delete_todo.id}: ${delete_todo.title} を削除しました`
+            this.message.color = "danger"
+            this.getApi()
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+    },
+    created: function () {
+      this.getApi();
+    },
+  });
+</script>
+{% endblock script %}
