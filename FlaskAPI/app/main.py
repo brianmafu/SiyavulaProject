@@ -30,6 +30,8 @@ def add_item():
     """Receives Item and Adds it to Database"""
     try:
         data = request.json
+        if not data:
+            data = request.form
         name = data.get('name', None)
         if name:
             list_item = models.ListItem(name=str(name),date_added=date.today())
@@ -37,6 +39,7 @@ def add_item():
             db.session.commit()
 
             return jsonify(
+                id = list_item.id,
                 message="Item has been Added",
                 name=name,
                 status =  str(201)
@@ -80,7 +83,12 @@ def all_items():
 def search_items():
     """Search for Item"""
     try:
-        search_primer = request.json.get("search_primer", None)
+        data = request.json
+
+        if not data:
+            data = request.form
+
+        search_primer =  data.form.get("search_primer", None)
         if not search_primer: return jsonify(message="No Items Found!",
         items=[]
         )
