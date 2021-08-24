@@ -44,7 +44,7 @@ def add_item():
                 status = str(200)
             )
     except Exception as e:
-        return json(
+        return jsonify(
         message = "Exception:{}".format(str(e)),
         items = [],
         count = 0,
@@ -65,7 +65,7 @@ def all_items():
             status = str(200)
         )
     except Exception as e:
-        return json(
+        return jsonify(
             message = "Exception:{}".format(str(e)),
             items = [],
             count = 0,
