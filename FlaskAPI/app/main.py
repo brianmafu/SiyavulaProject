@@ -40,7 +40,7 @@ def add_item():
                 message="Item has been Added",
                 name=name,
                 status =  str(201)
-            ),
+            )
         else:
             return jsonify(
                 message="Failed to Add Item",
