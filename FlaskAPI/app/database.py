@@ -1,6 +1,6 @@
 """Initialize database configs."""
 
 import os
-DATABASE_URL = os.environ["SQLALCHEMY_DATABASE_URI"]
+DATABASE_URL = "postgresql+psycopg2://siyavula:siyavula123@db/siyavula_db"
 
 

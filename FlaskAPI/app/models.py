@@ -5,14 +5,17 @@ import datetime
 from flask_migrate import Migrate
 from flask import Flask
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.sqltypes import DateTime
 
-from sqlalchemy.types import DateTime
+from .database import DATABASE_URL
 
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -39,3 +42,5 @@ class ListItem(db.Model):
            'date_added': dump_datetime(self.date_added),
        }
 
+
+db.create_all()

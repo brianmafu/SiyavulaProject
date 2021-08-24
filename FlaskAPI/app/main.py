@@ -9,10 +9,14 @@ from datetime import date
 from . import models
 from .database import DATABASE_URL
 
+import os
+
 API_VERSION = "v1"
 app = Flask(__name__)
-app.config ['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_DATABASE_URI'] =  DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 migrate = Migrate(app, db)
 
 @app.errorhandler(404)
@@ -105,4 +109,5 @@ def search_items():
         )
 
 if __name__ == "__main__":
+  
     app.run(host='0.0.0.0', debug=True, port=5000)

@@ -6,7 +6,10 @@ services:
       - db
     environment:
       STAGE: test
+      FLASK_APP: app.main:app
       SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://siyavula:siyavula123@db/siyavula_db
+    env_file:
+      - ./.env
     networks:
       - default
     ports:
