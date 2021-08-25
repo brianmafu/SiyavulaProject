@@ -16,20 +16,20 @@ class ToDoIndexViews(object):
         return {}
 
 
-    @view_config(route_name="search", request_method="POST", renderer="json")
-    def post(self):
-        try:
-            if self.request.json_body:
-                r = requests.post(
-                    API_URL + "/{}/search-item".format(API_VERSION),
-                    data={
-                        "search_primer": self.request.json_body.get('search_primer')
-                    }
+    # @view_config(route_name="search", request_method="POST", renderer="json")
+    # def post(self):
+    #     try:
+    #         if self.request.json_body:
+    #             r = requests.post(
+    #                 API_URL + "/{}/search-item".format(API_VERSION),
+    #                 data={
+    #                     "search_primer": self.request.json_body.get('search_primer')
+    #                 }
                 
-                )
+    #             )
         
-            return {"create_todo": {
-                "name": self.request.json_body.get('search_primer')}}
-        except Exception as e:
-            print(e)
+    #         return {"create_todo": {
+    #             "name": self.request.json_body.get('search_primer')}}
+    #     except Exception as e:
+    #         print(e)
 

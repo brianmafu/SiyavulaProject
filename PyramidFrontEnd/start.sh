@@ -1,1 +1,4 @@
-pserve --reload development.ini # run server
+
+poetry install
+pserve --reload production.ini # run server
+

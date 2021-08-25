@@ -76,8 +76,21 @@
           .then((response) => {
             this.show = true;
             create_todo = response.data.create_todo;
-            this.message.text = `ID ${response.data.id}: ${create_todo.name} Title`
-            this.message.color = "success"
+            error_message = response.data.create_todo.error_message;
+            message = `${create_todo.name} Created`;
+            if ((error_message!=null) || (error_message!=undefined)) {
+              console.log(error_message);
+              message = error_message;
+              this.message.text = message;
+
+              this.message.color = "failed";
+            } else {
+
+              this.message.color = "success";
+              this.message.text = message;
+
+
+            }
             this.getApi()
           })
           .catch(function (error) {
