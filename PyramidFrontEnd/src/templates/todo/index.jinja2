@@ -76,27 +76,8 @@
           .then((response) => {
             this.show = true;
             create_todo = response.data.create_todo;
-            this.message.text = `ID ${create_todo.id}: ${create_todo.name} Title`
+            this.message.text = `ID ${response.data.id}: ${create_todo.name} Title`
             this.message.color = "success"
-            this.getApi()
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      onClickEdit(evt) {},
-      onClickDelete(deleteTodoId) {
-        console.log(deleteTodoId)
-        api({
-          method: "delete",
-          url: "/api/todo",
-          data: deleteTodoId,
-        })
-          .then((response) => {
-            this.show = true;
-            delete_todo = response.data.delete_todo;
-            this.message.text = `${delete_todo.id}: ${delete_todo.title} を削除しました`
-            this.message.color = "danger"
             this.getApi()
           })
           .catch(function (error) {

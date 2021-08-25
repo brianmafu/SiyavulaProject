@@ -39,21 +39,3 @@ class ToDoAPIViews(object):
                 "name": self.request.json_body.get('name')}}
         except Exception as e:
             print(e)
-
-    @view_config(request_method="DELETE", renderer="json")
-    def delete(self):
-        pass
-        # sp = self.request.tm.savepoint()
-        # if self.request.json_body:
-        #     try:
-        #         query = self.request.dbsession.query(models.ToDoModel).filter(
-        #             models.ToDoModel.id == self.request.json_body
-        #         )
-        #         target_todo = query.first()
-        #         self.request.dbsession.delete(target_todo)
-        #         self.request.dbsession.flush()
-        #     except IntegrityError:
-        #         sp.rollback()
-        # else:
-        #     return {"result": "削除失敗"}
-        # return {"delete_todo": Todo().dump(target_todo)}

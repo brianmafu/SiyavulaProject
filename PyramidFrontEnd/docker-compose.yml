@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  frontend_app:
+    build: .
+    networks:
+      - default
+    ports:
+      - 6543:6543
+    command: bash start.sh
+    restart: always

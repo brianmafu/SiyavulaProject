@@ -10,12 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# pipのアップデート
 RUN pip install --upgrade pip setuptools wheel
-# Poetryをインストール
 RUN pip install poetry
 
-# コンテナ内で仮想環境の作成を無効
 RUN poetry config virtualenvs.create false
 RUN poetry config virtualenvs.in-project true
 
