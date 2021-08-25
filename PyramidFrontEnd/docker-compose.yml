@@ -1,10 +1,13 @@
-version: "3.3"
+version: "3.5"
 services:
   frontend_app:
     build: .
-    networks:
-      - default
+  
     ports:
       - 6543:6543
     command: bash start.sh
     restart: always
+networks:
+  default:
+    external: true
+    name: flaskapi_backend

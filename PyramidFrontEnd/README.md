@@ -1,4 +1,4 @@
-Siyavula TodoList Frontend App
+Siyavula Education TodoList Frontend App
 =================================
 
 
@@ -6,6 +6,8 @@ Siyavula TodoList Frontend App
 Getting Started
 ---------------
 
+Running Locally
+---------------------------
 - Change directory into your newly created project.
 
   ```
@@ -30,23 +32,6 @@ Getting Started
   env/bin/poetry install
   ```
 
-- Initialize and upgrade the database using Alembic.
-
-    - Generate your first revision.
-        ```
-        env/bin/alembic -c development.ini revision --autogenerate -m "init"
-        ```
-
-    - Upgrade to that revision.
-        ```
-        env/bin/alembic -c development.ini upgrade head
-        ```
-
-- Load default data into the database using a script.
-    ```
-    env/bin/initialize_src_db development.ini
-    ```
-
 - Run your project's tests.
     ```
     env/bin/pytest
@@ -59,10 +44,8 @@ Getting Started
 
 
 - Or you can start with Docker.
-    ```
-    make build
-    ```
-
-    ```
-    make run
-    ```
+## Build and Run the App With Docker)
+Run `docker-compose build` to build the containers.  
+Run `docker-compose up` to start the app.  
+Run `docker-compose up -d` to start the app in detached mode.  
+Run `docker-compose down` to stop the app.

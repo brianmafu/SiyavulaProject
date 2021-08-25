@@ -1,10 +1,8 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config, view_defaults
+from .api_settings import API_VERSION, API_URL
 import requests
-API_URL = "http://localhost:5000"
-API_VERSION = "v1"
-
 
 
 def classify_error_messages (error_message): 

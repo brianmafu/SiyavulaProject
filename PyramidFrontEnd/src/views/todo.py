@@ -1,9 +1,9 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config, view_defaults
+from .apis.api_settings import API_URL, API_VERSION
 import requests
-API_URL = "http://localhost:5000"
-API_VERSION = "v1"
+
 
 @view_defaults(route_name="todo_index")
 class ToDoIndexViews(object):
@@ -13,6 +13,7 @@ class ToDoIndexViews(object):
 
     @view_config(request_method="GET", renderer="../templates/todo/index.jinja2")
     def get(self):
+        print("we go here man")
         return {}
 
 
