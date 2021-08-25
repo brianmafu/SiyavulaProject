@@ -1,5 +1,6 @@
 #!/bin/sh
-set -e
+# set -e
+flask db init
 flask db migrate 
 flask db upgrade
 # run tests

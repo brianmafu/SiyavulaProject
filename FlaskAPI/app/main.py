@@ -88,7 +88,7 @@ def search_items():
         if not data:
             data = request.form
 
-        search_primer =  data.form.get("search_primer", None)
+        search_primer =  data.get("search_primer", None)
         if not search_primer: return jsonify(message="No Items Found!",
         items=[]
         )

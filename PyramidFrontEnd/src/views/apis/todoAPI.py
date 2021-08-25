@@ -17,10 +17,11 @@ class ToDoAPIViews(object):
         self.request = request
         self.view_name = "ToDoAPIViews"
 
+
     @view_config(
-        request_method="GET", renderer="json",
+    request_method="GET", renderer="json",
     )
-    def get(self):
+    def get(request):
         r = requests.get(API_URL + "/{}/all-items".format(API_VERSION))
         todo_list = []
         try:
@@ -56,3 +57,22 @@ class ToDoAPIViews(object):
             return {"create_todo": {
                "error_message": classify_error_messages(str(e))}
             }
+
+
+@view_config(
+    route_name="api_todo_search",
+    request_method="GET", renderer="json"
+)
+def get(request):
+    search_primer = request.matchdict['name']
+    r = requests.post(API_URL + "/{}/search-item".format(API_VERSION),
+    data={
+       'search_primer': search_primer
+    })
+    todo_list = []
+    try:
+        todo_list = r.json()['items']
+    except Exception as e:
+        print(e)
+
+    return {"todo_list":todo_list}

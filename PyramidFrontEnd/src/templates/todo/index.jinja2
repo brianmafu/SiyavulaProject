@@ -11,13 +11,13 @@
           id="input-1"
           v-model="form.name"
           required
-          placeholder="Add Item Name"
+          placeholder="Add or Search for Item"
         ></b-form-input>
       </b-form-group>
     
 
       <b-button type="submit" variant="primary">Add Item to List</b-button>
-      <b-button type="button" variant="primary">Search For Item</b-button>
+      <b-button type="button"  @click.prevent="onSearch" variant="primary">Search For Item</b-button>
 
     </b-form>
 
@@ -62,13 +62,21 @@
           url: "/api/todo",
         })
           .then((response) => {
-            console.log(response);
             this.todo_list = response.data.todo_list;
           })
           .catch(function (error) {
             console.log(error);
           });
       },
+      onSearch(evt) {
+        api({
+          method: "get",
+          url: `/api/todo/${this.form['name']}`,
+          data: this.form,
+        }).then((response)=>{
+          this.show = true;
+          this.todo_list = response.data.todo_list;
+      })},
       onSubmitPost(evt) {
         api({
           method: "post",

@@ -13,7 +13,6 @@ class ToDoIndexViews(object):
 
     @view_config(request_method="GET", renderer="../templates/todo/index.jinja2")
     def get(self):
-        print("we go here man")
         return {}
 
 
